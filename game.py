@@ -3,6 +3,7 @@
 import string
 import random
 import unittest
+import requests
 
 class Game(unittest.TestCase):
     def __init__(self):
@@ -19,4 +20,11 @@ class Game(unittest.TestCase):
                 letters.remove(letter)
             else:
                 return False
-        return True
+ #        return True
+        return self.__check_dictionary(word)
+
+  # @staticmethod
+    def __check_dictionary(self,word):
+        response = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
+        json_response = response.json()
+        return json_response['found']
