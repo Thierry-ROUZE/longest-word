@@ -1,12 +1,12 @@
+ #        pdb.set_trace() ;
 import unittest
 import string
-import pdb;
+import pdb
 from game import Game
 
-class myTestGame(unittest.TestCase):
+class TestGame(unittest.TestCase):
     def test_game_initialization(self):
         new_game = Game()
- #        pdb.set_trace() ;
         grid = new_game.grid
         self.assertIsInstance(grid, list)
         self.assertEqual(len(grid), 9)
@@ -21,7 +21,6 @@ class myTestGame(unittest.TestCase):
         new_game = Game()
         new_game.grid = list('KWEUEAKRZ') # Force the grid to a test case:
         self.assertIs(new_game.is_valid('EUREKA'), True)
-        self.assertIs(new_game.is_valid('EUREKA'), False)
         self.assertEqual(new_game.grid, list('KWEUEAKRZ')) # Make sure the grid remained untouched
 
     def test_is_invalid(self):
@@ -30,3 +29,7 @@ class myTestGame(unittest.TestCase):
         self.assertIs(new_game.is_valid('SANDWICH'), False)
         self.assertEqual(new_game.grid, list('KWEUEAKRZ')) # Make sure the grid remained untouched
 
+    def test_unknown_word_is_invalid(self):
+       new_game = Game()
+       new_game.grid = list('KWIENFUQW') # Force the grid to a test case:
+       resultat=self.assertIs(new_game.is_valid('FEUN'), False)
